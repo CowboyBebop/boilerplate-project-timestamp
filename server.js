@@ -44,7 +44,7 @@ app.get("/api/timestamp/:date_string", function (req, res) {
 
   let date = new Date(date_string);
 
-  if (dateObject.toString() === "Invalid Date")
+  if (date.toString() === "Invalid Date")
   {
     res.json({"error" : "Invalid Date" });
   }
