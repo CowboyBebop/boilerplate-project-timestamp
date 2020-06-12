@@ -30,7 +30,7 @@ app.get("/api/timestamp/:date_string?", function (req, res) {
 
   let date;
 
-  if(date_string) date = new Date(date_string);
+  if(req.params.date_string) date = new Date(req.params.date_string);
   else date = new Date();
 
 
