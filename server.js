@@ -25,22 +25,23 @@ app.get("/api/hello", function (req, res) {
 });
 
 
-app.get("/api/timestamp/:date_string?", function (req, res) {
+app.get("/api/timestamp/", (req, res) => {
+  res.json({ unix: Date.now(), utc: Date() });
+});
 
 
-  let date;
 
-  if(req.params.date_string) date = new Date(req.params.date_string);
-  else date = new Date();
+app.get("/api/timestamp/:date_string", function (req, res) {
 
+  let dateString = req.params.date_string;
 
-  if(date != null) 
+  if (/\d{5,}/.test(dateString))
   {
-    res.json({"unix": date.getTime(), "utc" : date.toUTCString() });
+    res.json({"error" : "Invalid Date" });
   }
   else
   {
-    res.json({"error" : "Invalid Date" });
+    res.json({"unix": date.getTime(), "utc" : date.toUTCString() });
   }
 });
 
