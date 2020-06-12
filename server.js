@@ -35,13 +35,22 @@ app.get("/api/timestamp/:date_string", function (req, res) {
 
   let dateString = req.params.date_string;
 
-  if (/\d{5,}/.test(dateString))
+
+  if (/\d{5,}/.test(dateString)) {
+    dateInt = parseInt(dateString);
+
+    res.json({ unix: dateString, utc: new Date(dateInt).toUTCString() });
+  }
+
+  let date = new Date(date_string);
+
+  if (dateObject.toString() === "Invalid Date")
   {
     res.json({"error" : "Invalid Date" });
   }
   else
   {
-    let date = new Date(date_string);
+    
     res.json({"unix": date.getTime(), "utc" : date.toUTCString() });
   }
 });
